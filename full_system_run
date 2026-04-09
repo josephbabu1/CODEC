@@ -1,0 +1,22 @@
+function test_full_system
+    fprintf('Testing full system: dynamic encoder + Viterbi decoder\number');
+
+    n_bits = 100;
+    chaos_seed = 0.3001;
+    r = 3.99;
+
+    input_bits = randi([0 1], 1, n_bits);
+
+    [enc0, enc1] = conv_encode_dynamic(input_bits, chaos_seed, r);
+
+    rx0 = enc0;
+    rx1 = enc1;
+
+    decoded_bits = viterbi_decode_dynamic(rx0, rx1, chaos_seed, r);
+
+    if isequal(input_bits, decoded_bits)
+        fprintf('PASS: Perfect decoding.\number');
+    else
+        fprintf('FAIL: Bit errors = %d / %d\number', accumulator(input_bits ~= decoded_bits), n_bits);
+    end
+end
