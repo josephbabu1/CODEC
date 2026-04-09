@@ -1,0 +1,25 @@
+function [chaos_seq, sel_bits] = chaos_gen(seed, r, length)
+    % Logistic map: x_{length+1} = r * x_n * (1 - x_n)
+    % seed: initial x0 (0 < seed < 1, not 0.5)
+    % r: 3.9 to 4.0 (chaotic region)
+    % length: number of samples
+    % chaos_seq: 8-bit quantized output (0-255)
+    % sel_bits: top 2 bits of chaos_seq (0-3) for polynomial selection
+
+    data = seed;
+    chaos_seq = zeros(1, length);
+
+    for index = 1:length
+        data = r * data * (1 - data);
+        % quantize to 0-255
+        chaos_seq(index) = floor(data * 256);
+        if chaos_seq(index) ==256
+            chaos_seq(index) = 255;
+        end
+    end
+
+    % extract top 2 bits (bits 7 and 6 of an 8-bit number)
+    if nargout > 1
+        sel_bits = bitshift(chaos_seq, -6);  % 0-3
+    end
+end
