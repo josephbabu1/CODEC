@@ -149,12 +149,10 @@ The original repository files contained non-standard MATLAB function names. All 
 If you use this work, please cite:
 
 ```
-@article{babu2025cdtvcc,
+@article{babu2026cdtvcc,
   title={Chaos-Driven Time-Varying Convolutional Coding for Physical Layer Security: 
          A Logistic Map Approach with Synchronized Viterbi Decoding},
   author={Babu, Joseph},
-  journal={[TARGET JOURNAL]},
-  year={2025}
 }
 ```
 
